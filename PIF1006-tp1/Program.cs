@@ -49,7 +49,7 @@ namespace PIF1006_tp1
                 {
                     Console.WriteLine("Veuillez entrer le chemin relatif du fichier");
                     input = Console.ReadLine();
-                    automate.LoadFromFile(input);
+                    automate.LoadFromFile("allo");
                 }
                 else if (input == "2")
                 {
