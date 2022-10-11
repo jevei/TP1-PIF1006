@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
+using System.IO;
 
 namespace PIF1006_tp1
 {
@@ -36,7 +38,8 @@ namespace PIF1006_tp1
             //          avant d'envoyer n'est pas obligatoire, mais cela ne doit pas faire planter de l'autre coté;  un message doit indiquer si
             //          c'est accepté ou rejeté;
             //      (4) Quitter l'application.
-            string input = null;
+            string input;
+            string defaultFolder = Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName) + @"\default.txt\";
             do
             {
                 Console.WriteLine("Bonjour,\nVeuillez choisir parmi les choix suivant\n1-Charger un fichier en spécifiant le chemin\n2-Afficher la liste des états et la liste des transitions\n3-Soumettre un input en tant que chaîne de 0 ou de 1\n4-Quitter");
