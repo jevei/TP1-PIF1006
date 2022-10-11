@@ -45,6 +45,21 @@ namespace PIF1006_tp1
                 Console.WriteLine("Bonjour,\nVeuillez choisir parmi les choix suivant\n1-Charger un fichier en spécifiant le chemin\n2-Afficher la liste des états et la liste des transitions\n3-Soumettre un input en tant que chaîne de 0 ou de 1\n4-Quitter");
                 input = Console.ReadLine();
                 Console.WriteLine(input);
+                if (input == "1")
+                {
+                    Console.WriteLine("Veuillez entrer le chemin relatif du fichier");
+                    input = Console.ReadLine();
+                    automate.LoadFromFile(input);
+                }
+                else if (input == "2")
+                {
+
+                }
+                else if (input == "3")
+                {
+                    Console.WriteLine("Veuillez entrer la chaîne de 0 et/ou de 1");
+                    input = Console.ReadLine();
+                }
             } while (input != "4");
         }
     }
