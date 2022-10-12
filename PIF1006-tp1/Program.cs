@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Windows.Forms;
 
 namespace PIF1006_tp1
 {
     public class Program
     {
+        [STAThread]
         static void Main(string[] args)
         {
  
@@ -47,9 +49,15 @@ namespace PIF1006_tp1
                 Console.WriteLine(input);
                 if (input == "1")
                 {
-                    Console.WriteLine("Veuillez entrer le chemin relatif du fichier");
+                    /*Console.WriteLine("Veuillez entrer le chemin relatif du fichier");
                     input = Console.ReadLine();
-                    automate.LoadFromFile(input);
+                    automate.LoadFromFile(input);*/
+                    OpenFileDialog dialog = new OpenFileDialog();
+                    if (DialogResult.OK == dialog.ShowDialog())
+                    {
+                        string path = dialog.FileName;
+                    }
+                    Console.WriteLine("Hello World!");
                 }
                 else if (input == "2")
                 {
