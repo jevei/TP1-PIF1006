@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PIF1006_tp1
 {
@@ -17,6 +14,10 @@ namespace PIF1006_tp1
         {
             InitialState = initialState;
             Reset();
+        }
+        public Automate()
+        {
+            
         }
 
         public void LoadFromFile(string filePath)
@@ -44,12 +45,72 @@ namespace PIF1006_tp1
             // Considérez que:
             //   - S'il y a d'autres termes, les lignes pourraient être ignorées;
             //   - Si l'état n'est pas trouvé dans la liste (p.ex. l'état est référencé mais n'existe pas (encore)), la transition est ignorée
-            ObservableCollection<State> stateList;
-            ObservableCollection<Transition> transitionList;
+            ObservableCollection<State> stateList = new ObservableCollection<State>();
+            ObservableCollection<Transition> transitionList = new ObservableCollection<Transition>();
             string[] lines = File.ReadAllLines(filePath);
-
+            //structure des données dans le fichier doit être
+            //pour state
+            //state name isFinal
+            //pour transition
+            //transition state input transiteTo
+            //comme dans l'exemple plus haut
             foreach (string line in lines)
+            {
                 Console.WriteLine(line);
+                string word = "";
+                bool found = false;
+                for (int i = 0; found != true; i++)
+                {
+                    if (line.ElementAt<char>(i) != ' ')
+                    {
+                        word += line.ElementAt<char>(i);
+                    }
+                    else
+                    {
+                        if (word == "state")
+                        {
+                            stateList.Add(EvaluateState(line));
+                            found = true;
+                        }
+                        else if (word == "transition")
+                        {
+                            transitionList.Add(EvaluateTransition(line));
+                            found = true;
+                        }
+                    }
+                }
+            }
+        }
+
+        private Transition EvaluateTransition(string line)
+        {
+            throw new NotImplementedException();
+        }
+
+        private State EvaluateState(string line)
+        {
+            string nom = "";
+            bool final = false;
+            for (int i = 6; i != line.Length; i++)
+            {
+                if (line.ElementAt<char>(i) != ' ')
+                {
+                    nom += line.ElementAt<char>(i);
+                }
+                else
+                {
+                    i += 1;
+                    if (line.ElementAt<char>(i) - 48 == 1)
+                    {
+                        final = true;
+                    }
+                    else
+                    {
+                        final = false;
+                    }
+                }
+            }
+            return new State(nom, final);
         }
 
         public bool Validate(string input)
