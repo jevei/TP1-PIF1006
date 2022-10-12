@@ -1,3 +1,4 @@
+transition s2 0 s3
 state s0 0
 state s1 0
 state s2 1

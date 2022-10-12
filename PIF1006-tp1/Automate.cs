@@ -76,7 +76,10 @@ namespace PIF1006_tp1
                         }
                         else if (word == "transition")
                         {
-                            TransitionList.Add(EvaluateTransition(line));
+                            if (EvaluateTransition(line) != null)
+                            {
+                                TransitionList.Add(EvaluateTransition(line));
+                            }
                             found = true;
                         }
                     }
@@ -106,10 +109,24 @@ namespace PIF1006_tp1
                     i++;
                 }
             }
-            State temp = StateList.ElementAt(StateList.IndexOf(StateList.Where(a => a.Name == transit).ToArray()[0]));
-            Transition returnTransition = new Transition(valeur, temp);
-            StateList.ElementAt(StateList.IndexOf(StateList.Where(a => a.Name == tState).ToArray()[0])).Transitions.Add(returnTransition);
-            return returnTransition;
+            if (StateList.Count != 0)
+            {
+                if (StateList.Where(a => a.Name == transit) != null && StateList.Where(a => a.Name == tState) != null)
+                {
+                    State temp = StateList.ElementAt(StateList.IndexOf(StateList.Where(a => a.Name == transit).ToArray()[0]));
+                    Transition returnTransition = new Transition(valeur, temp);
+                    StateList.ElementAt(StateList.IndexOf(StateList.Where(a => a.Name == tState).ToArray()[0])).Transitions.Add(returnTransition);
+                    return returnTransition;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            else
+            {
+                return null;
+            }
         }
 
         private State EvaluateState(string line)
