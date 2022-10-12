@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace PIF1006_tp1
@@ -41,23 +42,30 @@ namespace PIF1006_tp1
             //          c'est accepté ou rejeté;
             //      (4) Quitter l'application.
             string input;
-            string defaultFolder = Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName) + @"\default.txt\";
+            string folder = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"default.txt");//Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + @"\default.txt\";
             do
             {
-                Console.WriteLine("Bonjour,\nVeuillez choisir parmi les choix suivant\n1-Charger un fichier en spécifiant le chemin\n2-Afficher la liste des états et la liste des transitions\n3-Soumettre un input en tant que chaîne de 0 ou de 1\n4-Quitter");
+                Console.WriteLine("Bonjour,\nVeuillez choisir parmi les choix suivant.\n1-Charger un fichier en spécifiant le chemin.\n2-Afficher la liste des états et la liste des transitions.\n3-Soumettre un input en tant que chaîne de 0 ou de 1.\n4-Quitter");
                 input = Console.ReadLine();
                 Console.WriteLine(input);
                 if (input == "1")
                 {
-                    /*Console.WriteLine("Veuillez entrer le chemin relatif du fichier");
+                    Console.WriteLine("Veuillez sélectionner le fichier.\n1-default.txt\n2-Au choix.");
                     input = Console.ReadLine();
-                    automate.LoadFromFile(input);*/
-                    OpenFileDialog dialog = new OpenFileDialog();
-                    if (DialogResult.OK == dialog.ShowDialog())
+                    if (input == "1")
                     {
-                        string path = dialog.FileName;
+                        input = folder;
                     }
-                    Console.WriteLine("Hello World!");
+                    else if (input == "2")
+                    {
+                        OpenFileDialog dialog = new OpenFileDialog();
+                        if (DialogResult.OK == dialog.ShowDialog())
+                        {
+                            input = dialog.FileName;
+                        }
+                    }
+                    automate.LoadFromFile(input);
+                    Console.WriteLine(input);
                 }
                 else if (input == "2")
                 {
@@ -65,7 +73,7 @@ namespace PIF1006_tp1
                 }
                 else if (input == "3")
                 {
-                    Console.WriteLine("Veuillez entrer la chaîne de 0 et/ou de 1");
+                    Console.WriteLine("Veuillez entrer la chaîne de 0 et/ou de 1.");
                     input = Console.ReadLine();
                 }
             } while (input != "4");

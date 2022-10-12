@@ -8,4 +8,10 @@
     <StartupObject>PIF1006_tp1.Program</StartupObject>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Update="default.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

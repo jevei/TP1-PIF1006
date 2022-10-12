@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -42,6 +44,12 @@ namespace PIF1006_tp1
             // Considérez que:
             //   - S'il y a d'autres termes, les lignes pourraient être ignorées;
             //   - Si l'état n'est pas trouvé dans la liste (p.ex. l'état est référencé mais n'existe pas (encore)), la transition est ignorée
+            ObservableCollection<State> stateList;
+            ObservableCollection<Transition> transitionList;
+            string[] lines = File.ReadAllLines(filePath);
+
+            foreach (string line in lines)
+                Console.WriteLine(line);
         }
 
         public bool Validate(string input)
