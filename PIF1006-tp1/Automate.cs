@@ -7,6 +7,8 @@ namespace PIF1006_tp1
 {
     public class Automate
     {
+        private ObservableCollection<State> StateList { get; set; }
+        private ObservableCollection<Transition> TransitionList { get; set; }
         public State InitialState { get; set; }
         public State CurrentState { get; set; }
 
@@ -17,7 +19,8 @@ namespace PIF1006_tp1
         }
         public Automate()
         {
-            
+            StateList = new ObservableCollection<State>();
+            TransitionList = new ObservableCollection<Transition>();
         }
 
         public void LoadFromFile(string filePath)
@@ -45,15 +48,14 @@ namespace PIF1006_tp1
             // Considérez que:
             //   - S'il y a d'autres termes, les lignes pourraient être ignorées;
             //   - Si l'état n'est pas trouvé dans la liste (p.ex. l'état est référencé mais n'existe pas (encore)), la transition est ignorée
-            ObservableCollection<State> stateList = new ObservableCollection<State>();
-            ObservableCollection<Transition> transitionList = new ObservableCollection<Transition>();
-            string[] lines = File.ReadAllLines(filePath);
+            
             //structure des données dans le fichier doit être
             //pour state
             //state name isFinal
             //pour transition
             //transition state input transiteTo
             //comme dans l'exemple plus haut
+            string[] lines = File.ReadAllLines(filePath);
             foreach (string line in lines)
             {
                 Console.WriteLine(line);
@@ -69,12 +71,12 @@ namespace PIF1006_tp1
                     {
                         if (word == "state")
                         {
-                            stateList.Add(EvaluateState(line));
+                            StateList.Add(EvaluateState(line));
                             found = true;
                         }
                         else if (word == "transition")
                         {
-                            transitionList.Add(EvaluateTransition(line));
+                            TransitionList.Add(EvaluateTransition(line));
                             found = true;
                         }
                     }
@@ -84,7 +86,30 @@ namespace PIF1006_tp1
 
         private Transition EvaluateTransition(string line)
         {
-            throw new NotImplementedException();
+            string tState = "";
+            char valeur = ' ';
+            string transit = "";
+            for (int i = 11; i != line.Length; i++)
+            {
+                if (line.ElementAt<char>(i) != ' ' && valeur == ' ')
+                {
+                    tState += line.ElementAt<char>(i);
+                }
+                else if (valeur != ' ')
+                {
+                    transit += line.ElementAt<char>(i);
+                }
+                else
+                {
+                    i++;
+                    valeur = line.ElementAt<char>(i);
+                    i++;
+                }
+            }
+            State temp = StateList.ElementAt(StateList.IndexOf(StateList.Where(a => a.Name == transit).ToArray()[0]));
+            Transition returnTransition = new Transition(valeur, temp);
+            StateList.ElementAt(StateList.IndexOf(StateList.Where(a => a.Name == tState).ToArray()[0])).Transitions.Add(returnTransition);
+            return returnTransition;
         }
 
         private State EvaluateState(string line)
@@ -99,7 +124,7 @@ namespace PIF1006_tp1
                 }
                 else
                 {
-                    i += 1;
+                    i++;
                     if (line.ElementAt<char>(i) - 48 == 1)
                     {
                         final = true;
