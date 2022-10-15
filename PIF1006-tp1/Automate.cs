@@ -58,7 +58,7 @@ namespace PIF1006_tp1
             string[] lines = File.ReadAllLines(filePath);
             foreach (string line in lines)
             {
-                Console.WriteLine(line);
+                //Console.WriteLine(line);
                 string word = "";
                 bool found = false;
                 for (int i = 0; found != true; i++)

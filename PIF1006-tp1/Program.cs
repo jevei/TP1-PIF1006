@@ -47,7 +47,7 @@ namespace PIF1006_tp1
             {
                 Console.WriteLine("Bonjour,\nVeuillez choisir parmi les choix suivant.\n1-Charger un fichier en spécifiant le chemin.\n2-Afficher la liste des états et la liste des transitions.\n3-Soumettre un input en tant que chaîne de 0 ou de 1.\n4-Quitter");
                 input = Console.ReadLine();
-                Console.WriteLine(input);
+                //Console.WriteLine(input);
                 if (input == "1")
                 {
                     Console.WriteLine("Veuillez sélectionner le fichier.\n1-default.txt\n2-Au choix.");
@@ -55,6 +55,7 @@ namespace PIF1006_tp1
                     if (input == "1")
                     {
                         input = folder;
+                        automate.LoadFromFile(input);
                     }
                     else if (input == "2")
                     {
@@ -63,9 +64,9 @@ namespace PIF1006_tp1
                         {
                             input = dialog.FileName;
                         }
+                        automate.LoadFromFile(input);
                     }
-                    automate.LoadFromFile(input);
-                    Console.WriteLine(input);
+                    //Console.WriteLine(input);
                 }
                 else if (input == "2")
                 {
