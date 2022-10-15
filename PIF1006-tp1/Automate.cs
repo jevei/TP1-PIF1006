@@ -188,13 +188,21 @@ namespace PIF1006_tp1
         {
             // Vous devez modifier cette partie de sorte à retourner un équivalent string qui décrit tous les états et
             // la table de transitions de l'automate.
-            string temp = "Table de transition\nCurrentState | NextState | Output | IsFinal\n";
+            string temp = "Table de transition\nCurrentState | IsFinal | NextState | Input\n";
             for (int i = 0; i != StateList.Count; i++)
             {
-                temp += StateList.ElementAt(i).Name;
                 for (int j = 0; j != StateList.ElementAt(i).Transitions.Count; j++)
                 {
-                    temp += StateList.ElementAt(i).Transitions.ElementAt(j);
+                    temp += StateList.ElementAt(i).Name + " | ";
+                    if (StateList.ElementAt(i).IsFinal == true)
+                    {
+                        temp += 1 + " | ";
+                    }
+                    else
+                    {
+                        temp += 0 + " | ";
+                    }
+                    temp += StateList.ElementAt(i).Transitions.ElementAt(j).TransiteTo.Name + " | " + (StateList.ElementAt(i).Transitions.ElementAt(j).Input - 48) + "\n";
                 }
             }
             return temp; 
