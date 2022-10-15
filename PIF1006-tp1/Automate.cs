@@ -78,7 +78,21 @@ namespace PIF1006_tp1
                         {
                             if (EvaluateTransition(line) != null)
                             {
-                                TransitionList.Add(EvaluateTransition(line));
+                                Transition returnTransition = EvaluateTransition(line);
+                                TransitionList.Add(returnTransition);
+                                string tState = "";
+                                for (int j = 11; j != line.Length; j++)
+                                {
+                                    if (line.ElementAt<char>(j) != ' ')
+                                    {
+                                        tState += line.ElementAt<char>(j);
+                                    }
+                                    else
+                                    {
+                                        j = line.Length - 1;
+                                    }
+                                }
+                                StateList.ElementAt(StateList.IndexOf(StateList.Where(a => a.Name == tState).ToArray()[0])).Transitions.Add(returnTransition);
                             }
                             found = true;
                         }
@@ -115,7 +129,6 @@ namespace PIF1006_tp1
                 {
                     State temp = StateList.ElementAt(StateList.IndexOf(StateList.Where(a => a.Name == transit).ToArray()[0]));
                     Transition returnTransition = new Transition(valeur, temp);
-                    StateList.ElementAt(StateList.IndexOf(StateList.Where(a => a.Name == tState).ToArray()[0])).Transitions.Add(returnTransition);
                     return returnTransition;
                 }
                 else
@@ -175,7 +188,16 @@ namespace PIF1006_tp1
         {
             // Vous devez modifier cette partie de sorte à retourner un équivalent string qui décrit tous les états et
             // la table de transitions de l'automate.
-            return base.ToString(); 
+            string temp = "Table de transition\nCurrentState | NextState | Output | IsFinal\n";
+            for (int i = 0; i != StateList.Count; i++)
+            {
+                temp += StateList.ElementAt(i).Name;
+                for (int j = 0; j != StateList.ElementAt(i).Transitions.Count; j++)
+                {
+                    temp += StateList.ElementAt(i).Transitions.ElementAt(j);
+                }
+            }
+            return temp; 
         }
 
         public void Reset() => CurrentState = InitialState;

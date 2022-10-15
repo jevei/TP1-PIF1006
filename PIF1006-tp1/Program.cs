@@ -69,7 +69,7 @@ namespace PIF1006_tp1
                 }
                 else if (input == "2")
                 {
-
+                    Console.WriteLine(automate.ToString());
                 }
                 else if (input == "3")
                 {
