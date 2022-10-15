@@ -14,7 +14,8 @@
         // Au besoin, vous pouvez ajouter du code ici, au min. de redéfinir ToString()
         public override string ToString()
         {
-            return "";
+            string temp = this.TransiteTo.Name + " | " + (this.Input - 48);
+            return temp;
         }    
     }
 }

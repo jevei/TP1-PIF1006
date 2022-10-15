@@ -18,7 +18,16 @@ namespace PIF1006_tp1
         // Au besoin, vous pouvez ajouter du code ici, au min. de redéfinir ToString()
         public override string ToString()
         {
-            return "";
+            string temp = this.Name + " | ";
+            if (this.IsFinal == true)
+            {
+                temp += 1 + " | ";
+            }
+            else
+            {
+                temp += 0 + " | ";
+            }
+            return temp;
         }    
     }
 }

@@ -212,16 +212,8 @@ namespace PIF1006_tp1
             {
                 for (int j = 0; j != StateList.ElementAt(i).Transitions.Count; j++)
                 {
-                    temp += StateList.ElementAt(i).Name + " | ";
-                    if (StateList.ElementAt(i).IsFinal == true)
-                    {
-                        temp += 1 + " | ";
-                    }
-                    else
-                    {
-                        temp += 0 + " | ";
-                    }
-                    temp += StateList.ElementAt(i).Transitions.ElementAt(j).TransiteTo.Name + " | " + (StateList.ElementAt(i).Transitions.ElementAt(j).Input - 48) + "\n";
+                    temp += StateList.ElementAt(i).ToString();
+                    temp += StateList.ElementAt(i).Transitions.ElementAt(j).ToString() + "\n";
                 }
             }
             return temp; 
