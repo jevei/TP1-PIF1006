@@ -172,7 +172,6 @@ namespace PIF1006_tp1
         {
             bool isValid = true;
             Reset();
-
             // Vous devez transformer l'input en une liste / un tableau de caractères (char) et les lire un par un;
             // L'automate doit maintenant à jour son "CurrentState" en suivant les transitions et en respectant l'input.
             // Considérez que l'automate est déterministe et que même si dans les faits on aurait pu mettre plusieurs
@@ -180,6 +179,7 @@ namespace PIF1006_tp1
             // Si aucune transition n'est trouvé pour un état courant et l'input donné, cela doit retourner faux;
             // Si tous les caractères ont été pris en compte, on vérifie si l'état courant est final ou non et on retourne
             // vrai ou faux selon.
+            char[] zeroOneList = input.ToCharArray();
 
             return isValid;
         }

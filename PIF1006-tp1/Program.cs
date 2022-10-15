@@ -75,6 +75,7 @@ namespace PIF1006_tp1
                 {
                     Console.WriteLine("Veuillez entrer la chaîne de 0 et/ou de 1.");
                     input = Console.ReadLine();
+                    automate.Validate(input);
                 }
             } while (input != "4");
         }
