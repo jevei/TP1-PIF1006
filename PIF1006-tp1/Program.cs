@@ -50,7 +50,7 @@ namespace PIF1006_tp1
                 //Console.WriteLine(input);
                 if (input == "1")
                 {
-                    Console.WriteLine("Veuillez sélectionner le fichier.\n1-default.txt\n2-Au choix.");
+                    Console.WriteLine("Veuillez sélectionner le fichier(choisir un fichier remplace l'ancien).\n1-default.txt\n2-Au choix.");
                     input = Console.ReadLine();
                     if (input == "1")
                     {
@@ -59,12 +59,15 @@ namespace PIF1006_tp1
                     }
                     else if (input == "2")
                     {
-                        OpenFileDialog dialog = new OpenFileDialog();
+                        OpenFileDialog dialog = new OpenFileDialog()
+                        {
+                            Filter = "TXT Files(*.txt;)|*.txt;"
+                        }; 
                         if (DialogResult.OK == dialog.ShowDialog())
                         {
                             input = dialog.FileName;
+                            automate.LoadFromFile(input);
                         }
-                        automate.LoadFromFile(input);
                     }
                     //Console.WriteLine(input);
                 }

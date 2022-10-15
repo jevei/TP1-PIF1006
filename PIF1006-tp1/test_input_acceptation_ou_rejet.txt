@@ -1,0 +1,21 @@
+Acceptation :
+pour l'automate de default.txt :
+01
+0001
+0001101001
+
+pour l'automate de test_deuxieme_automate.txt :
+1
+10
+001011
+
+Refus :
+pour l'automate de default.txt :
+010
+000101
+010110100101
+
+pour l'automate de test_deuxieme_automate.txt :
+11
+101
+001011010110

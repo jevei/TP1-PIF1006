@@ -14,6 +14,10 @@ namespace PIF1006_tp1
             IsFinal = isFinal;
             Transitions = new List<Transition>();
         }
+        public State()
+        { 
+
+        }
 
         // Au besoin, vous pouvez ajouter du code ici, au min. de redéfinir ToString()
         public override string ToString()

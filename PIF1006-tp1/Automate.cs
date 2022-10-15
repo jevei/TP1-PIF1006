@@ -48,13 +48,15 @@ namespace PIF1006_tp1
             // Considérez que:
             //   - S'il y a d'autres termes, les lignes pourraient être ignorées;
             //   - Si l'état n'est pas trouvé dans la liste (p.ex. l'état est référencé mais n'existe pas (encore)), la transition est ignorée
-            
+
             //structure des données dans le fichier doit être
             //pour state
             //state name isFinal
             //pour transition
             //transition state input transiteTo
             //comme dans l'exemple plus haut
+            StateList = new ObservableCollection<State>();
+            TransitionList = new ObservableCollection<Transition>();///vider ancien automate s'il y a lieu
             string[] lines = File.ReadAllLines(filePath);
             foreach (string line in lines)
             {
@@ -63,7 +65,11 @@ namespace PIF1006_tp1
                 bool found = false;
                 for (int i = 0; found != true; i++)
                 {
-                    if (line.ElementAt<char>(i) != ' ')
+                    if (i == line.Length)
+                    {
+                        found = true;
+                    }
+                    else if (line.ElementAt<char>(i) != ' ')
                     {
                         word += line.ElementAt<char>(i);
                     }
@@ -96,10 +102,17 @@ namespace PIF1006_tp1
                             }
                             found = true;
                         }
+                        else 
+                        {
+                            found = true;
+                        }
                     }
                 }
             }
-            InitialState = StateList.First();
+            if (StateList.Count != 0)
+            {
+                InitialState = StateList.First();
+            }
         }
 
         private Transition EvaluateTransition(string line)
@@ -185,7 +198,7 @@ namespace PIF1006_tp1
             {
                 for (int i = 0; i != zeroOneList.Length; i++)
                 {
-                    State transi = CurrentState;
+                    State transi = new State();
                     for (int j = 0; j != CurrentState.Transitions.Count; j++)
                     {
                         if (zeroOneList[i] == CurrentState.Transitions.ElementAt(j).Input)
@@ -194,6 +207,11 @@ namespace PIF1006_tp1
                         }
                     }
                     CurrentState = transi;
+                    State condition = new State();
+                    if (CurrentState.Name == condition.Name)
+                    {
+                        i = zeroOneList.Length-1;
+                    }
                 }
                 if (CurrentState.IsFinal == true)
                 {
