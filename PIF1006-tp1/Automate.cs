@@ -99,6 +99,7 @@ namespace PIF1006_tp1
                     }
                 }
             }
+            InitialState = StateList.First();
         }
 
         private Transition EvaluateTransition(string line)
@@ -170,7 +171,7 @@ namespace PIF1006_tp1
 
         public bool Validate(string input)
         {
-            bool isValid = true;
+            bool isValid = false;
             Reset();
             // Vous devez transformer l'input en une liste / un tableau de caractères (char) et les lire un par un;
             // L'automate doit maintenant à jour son "CurrentState" en suivant les transitions et en respectant l'input.
@@ -180,7 +181,25 @@ namespace PIF1006_tp1
             // Si tous les caractères ont été pris en compte, on vérifie si l'état courant est final ou non et on retourne
             // vrai ou faux selon.
             char[] zeroOneList = input.ToCharArray();
-
+            if (CurrentState != null)
+            {
+                for (int i = 0; i != zeroOneList.Length; i++)
+                {
+                    State transi = CurrentState;
+                    for (int j = 0; j != CurrentState.Transitions.Count; j++)
+                    {
+                        if (zeroOneList[i] == CurrentState.Transitions.ElementAt(j).Input)
+                        {
+                            transi = CurrentState.Transitions.ElementAt(j).TransiteTo;
+                        }
+                    }
+                    CurrentState = transi;
+                }
+                if (CurrentState.IsFinal == true)
+                {
+                    isValid = true;
+                }
+            }
             return isValid;
         }
 

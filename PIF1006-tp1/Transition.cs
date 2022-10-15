@@ -12,5 +12,9 @@
         }
 
         // Au besoin, vous pouvez ajouter du code ici, au min. de redéfinir ToString()
+        public override string ToString()
+        {
+            return "";
+        }    
     }
 }
