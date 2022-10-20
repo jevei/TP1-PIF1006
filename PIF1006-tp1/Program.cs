@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace PIF1006_tp1
 {
-    public class Program
+    public class Program///coéquipier : travail fait seul, donc seulement Jérémy Veillette
     {
         [STAThread]
         static void Main(string[] args)
